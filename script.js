@@ -1,11 +1,30 @@
 var Counter = React.createClass({
     //metoda określająca początkowy stan komponentu
-    //faza inicjalizacji
     getInitialState: function() {
         return {
             counter: 0
         };
     },
+
+    componentDidMount: function() {
+        console.log('the counter component ask browser to configure initial value')
+    },
+
+    componentDidUpdate: function() {
+        console.log('compares current prop with previous props')
+    },
+
+    shouldComponentUpdate: function(){
+        console.log('this method optimize the counter performance');
+        return (
+            true
+        );
+   },
+
+   componentWillUnmount: function() {
+       console.log("th eend of component's lifecycle; delete component")
+   },
+
     //logika zwiększająca o 1 (inkrementacja)
     increment: function() {
         this.setState({
@@ -19,7 +38,6 @@ var Counter = React.createClass({
             counter: this.state.counter - 1
         });
     },
-    //faza aktualizacji
     render: function() {
         return React.createElement('div', {}, 
             React.createElement('button', {onClick: this.increment}, 'Plus 1'),
